@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Document</title>
 </head>
 <body>
-        <form action="connect.php" method="post">
+        <form action="regjistrohu.php" method="post">
             <input type="text" name="emri" placeholder="emri">
             <input type="text" name="email" placeholder="email">
             <input type="password" name="password" placeholder="password">
