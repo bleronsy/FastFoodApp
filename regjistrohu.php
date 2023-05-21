@@ -29,15 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./styles/regjistrohu.css">
 </head>
 <body>
         <form action="regjistrohu.php" method="post">
-            <input type="text" name="emri" placeholder="emri">
-            <input type="text" name="email" placeholder="email">
-            <input type="password" name="password" placeholder="password">
-            <input type="text" name="adresa" placeholder="adresa">
-            <input type="text" name="nrtel" placeholder="nr_tel">
-            <input type="submit">
+            <input type="text" name="emri" placeholder="Emri">
+            <input type="text" name="email" placeholder="Email">
+            <input type="password" name="password" placeholder="Password">
+            <input type="text" name="adresa" placeholder="Adresa">
+            <input type="text" name="nrtel" placeholder="Numri i telefonit">
+            <input type="submit" value="Regjistrohu">
         </form>
 </body>
 </html>
