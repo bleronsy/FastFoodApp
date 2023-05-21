@@ -13,11 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($conn->connect_error) {
         die('Connection Failed: ' . $conn->connect_error);
     } else {
-        $stmt = $conn->prepare("INSERT INTO regjistrimi (Emri, Email, Password, Adresa, NrTel) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $Emri, $Email, $Password, $Adresa, $NrTel);
-        $stmt->execute();
-        echo "Registration successful...";
-        $stmt->close();
+        // Check if terms and conditions are accepted
+        if (isset($_POST['terms'])) {
+            $stmt = $conn->prepare("INSERT INTO regjistrimi (Emri, Email, Password, Adresa, NrTel) VALUES (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssss", $Emri, $Email, $Password, $Adresa, $NrTel);
+            $stmt->execute();
+            echo "Registration successful...";
+            $stmt->close();
+        } else {
+            echo "Please accept the Terms & Conditions.";
+        }
     }
 }
 ?>
@@ -32,13 +37,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="./styles/regjistrohu.css">
 </head>
 <body>
-        <form action="regjistrohu.php" method="post">
-            <input type="text" name="emri" placeholder="Emri">
-            <input type="text" name="email" placeholder="Email">
-            <input type="password" name="password" placeholder="Password">
-            <input type="text" name="adresa" placeholder="Adresa">
-            <input type="text" name="nrtel" placeholder="Numri i telefonit">
-            <input type="submit" value="Regjistrohu">
-        </form>
+    <form action="regjistrohu.php" method="post">
+        <input type="text" name="emri" placeholder="Emri">
+        <input type="text" name="email" placeholder="Email">
+        <input type="password" name="password" placeholder="Password">
+        <input type="text" name="adresa" placeholder="Adresa">
+        <input type="text" name="nrtel" placeholder="Numri i telefonit">
+        <div class="terms-checkbox">
+            <input type="checkbox" name="terms" id="terms-checkbox">
+            <label for="terms-checkbox">A pajtoheni me <span>Terms & Conditions</span> dhe <span>Privacy Policy</span></label>
+        </div>
+        <input type="submit" value="Regjistrohu">
+    </form>
+    <a href="./kycu.php" class="keni_llogari">Keni llogari? Kycu</a>
+    <a href="" class="pa_llogari">Vazhdo pa krijuar llogari</a>
+    <p class="form-message">
+        <?php
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!isset($_POST['terms'])) {
+                echo "Please accept the Terms & Conditions.";
+            }
+        }
+        ?>
+    </p>
 </body>
 </html>
