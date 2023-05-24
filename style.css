@@ -53,6 +53,30 @@
 
 
 a{
-    text-decoration: none;
-    color: black;
+    color: blue;
+}
+
+.emri{
+    color: beige;
+    font-size: large;
+}
+.ushqimi {
+  position: relative;
+}
+
+.ushqimi .imazhi {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+}
+
+.emri,
+.detajet,
+.cmimi {
+  color: white;
+  position: relative;
+  z-index: 1;
 }
