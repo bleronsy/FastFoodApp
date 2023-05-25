@@ -13,7 +13,7 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center left;
-    background-image: url(../images/hamburger.png);
+    background-image: url(/images/hamburger.png);
 }
 
 .miniCartTotal {
@@ -88,7 +88,7 @@ a{
     filter: saturate(150%);
 }
 
-.emri,.detajet,.cmimi {
+.emri,.detajet,.cmimi,.add-to-cart {
   color: white;
   position: relative;
   z-index: 1;

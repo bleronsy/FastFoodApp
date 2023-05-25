@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -17,7 +17,10 @@
         <div class="bigCnt bigCntHeader">
             <div class="logo"></div> 
            
-            <div class="miniCartTotal">0.00€</div>
+            <div class="miniCartTotal">
+                <div id="chart"></div>    
+                <div>Total Price: <span id="total">0.00</span>€</div>    
+            </div>
            <div class="alertProductAddToCart">
            Shporta
             </div>
@@ -59,6 +62,7 @@
                             echo "<div class='detajet'>".$row['detajet']."</div>";
                             echo "<div class='cmimi'>".$row['cmimi']."</div>";
                             echo "<div class='imazhi'><img src='".$row['imazhi']."' alt=''  /></div>";
+                            echo "<button class='add-to-cart' data-name='".$row['emri']."' data-price='".$row['cmimi']."'>Add to Cart</button>";
                             echo "</div>";
                         }
                     } else {
@@ -68,6 +72,10 @@
                     echo "Connection failed: " . $e->getMessage();
                 }
             ?>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="script.js"></script>
+
         </div>
         </div>
 
