@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+// Check if the user is already logged in, redirect to admin.php
+
+// Rest of the code...
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,7 +101,8 @@
 
         // Check if the query returned any rows
         if ($result && $result->num_rows > 0) {
-            // User is authenticated, redirect to a new page
+            // User is authenticated, set session variable and redirect to admin.php
+            $_SESSION['username'] = $username;
             header("Location: admin.php");
             exit;
         } else {
