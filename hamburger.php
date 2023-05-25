@@ -42,7 +42,7 @@
                     $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                    $query = "SELECT emri, detajet, cmimi, imazhi FROM oferta";
+                    $query = "SELECT emri, detajet, cmimi, imazhi FROM ushqimet WHERE LOWER(lloji) = 'hamburger'";
                     $stmt = $conn->query($query);
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
