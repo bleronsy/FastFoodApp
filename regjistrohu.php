@@ -1,4 +1,5 @@
 <?php
+session_start();
 $host = 'localhost';
 $db_name = 'fooddelivery';
 
@@ -45,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" name="nrtel" placeholder="Numri i telefonit">
         <div class="terms-checkbox">
             <input type="checkbox" name="terms" id="terms-checkbox">
-            <label for="terms-checkbox">A pajtoheni me <span>Terms & Conditions</span> dhe <span>Privacy Policy</span></label>
+            <label for="terms-checkbox">A pajtoheni me <a href="terms.php" class="terms">Terms & Conditions</a> dhe <a href="privacyPolicy.php" class="terms">Privacy Policy</a></label>
         </div>
         <input type="submit" value="Regjistrohu">
     </form>

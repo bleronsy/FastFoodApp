@@ -41,6 +41,7 @@
 
         <div class="gjithaUshqimet">
             <?php
+            session_start();
                 $host = 'localhost';
                 $dbname = 'fooddelivery';
                 $username = 'root';
