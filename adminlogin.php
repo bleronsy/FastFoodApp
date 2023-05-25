@@ -106,15 +106,15 @@
     }
     ?>
 
-    <h2>Login Form</h2>
+    <h2>Kyçja e administratorit</h2>
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-        <label for="username">Username:</label>
+        <label for="username">Emri:</label>
         <input type="text" id="username" name="username" required><br><br>
 
-        <label for="password">Password:</label>
+        <label for="password">Fjalëkalimi:</label>
         <input type="password" id="password" name="password" required><br><br>
 
-        <input type="submit" value="Login">
+        <input type="submit" value="Kyçu">
     </form>
 </body>
 </html>
