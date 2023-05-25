@@ -13,7 +13,7 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center left;
-    background-image: url(./images/hamburger.png);
+    background-image: url(../images/hamburger.png);
 }
 
 .miniCartTotal {
@@ -53,30 +53,70 @@
 
 
 a{
-    color: blue;
+    text-decoration: none;
+    color: black;
 }
 
-.emri{
-    color: beige;
-    font-size: large;
+.gjithaUshqimet{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
+
 .ushqimi {
   position: relative;
+  width: 30%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5% 1%;
 }
 
-.ushqimi .imazhi {
+.imazhi {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-
+  height:100%;
 }
 
-.emri,
-.detajet,
-.cmimi {
+.imazhi img{
+    width: 100%;
+    height: auto;
+    filter: saturate(150%);
+}
+
+.emri,.detajet,.cmimi {
   color: white;
   position: relative;
   z-index: 1;
 }
+
+.emri{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin:20% 0;
+    text-shadow: 5px 5px 15px white;
+}
+
+.detajet{
+    margin: 0 10%;
+    font-size: 22px;
+    padding-top: 15%;
+}
+.cmimi{
+    text-align: right;
+    font-size: 24px;
+    margin-right: 25%;
+    font-weight: bold;
+    padding-top: 10%;
+    text-shadow: 5px 5px 15px white;
+}
+
+.detajet::first-letter {
+    text-transform: uppercase;
+  }

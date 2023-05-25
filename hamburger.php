@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
     <header>
@@ -26,7 +26,7 @@
     <main>
         <div class="pjesaKryesoreListaDheUshqimet">
         <ul class="lista_e_ushqimeve">
-            <li><a href="./Oferta.php">Oferta</a></li>
+            <li><a href="./index.php">Oferta</a></li>
             <li><a href="./sandwich.php">Sandwich-a</a></li>
             <li><a href="./hamburger.php">Hamburgera</a></li>
             <li><a href="./pizza.php">Pizza</a></li>
@@ -58,7 +58,7 @@
                             echo "<div class='emri'>".$row['emri']."</div>";
                             echo "<div class='detajet'>".$row['detajet']."</div>";
                             echo "<div class='cmimi'>".$row['cmimi']."</div>";
-                            echo "<div class='imazhi'><img src='".$row['imazhi']."' alt='' /></div>";
+                            echo "<div class='imazhi'><img src='".$row['imazhi']."' alt=''  /></div>";
                             echo "</div>";
                         }
                     } else {
