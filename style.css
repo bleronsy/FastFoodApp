@@ -13,14 +13,7 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center left;
-    background-image: url(/images/hamburger.png);
-}
-
-.miniCartTotal {
-    float: right;
-    margin-right: 20px;
-    padding: 0;
-    font-size: 36px;
+    background-image: url(images/hamburger.png);
 }
 
 .alertProductAddToCart {
@@ -106,17 +99,46 @@ a{
 .detajet{
     margin: 0 10%;
     font-size: 22px;
-    padding-top: 15%;
 }
+
+.ushqimiBottom{
+    padding-top: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.add-to-cart{
+    background-color: black;
+}
+
+.remove-item{
+    margin-left:5px;
+}
+
+.remove-item{
+    color: white;
+    background-color: black;
+}
+
 .cmimi{
-    text-align: right;
     font-size: 24px;
     margin-right: 25%;
     font-weight: bold;
-    padding-top: 10%;
     text-shadow: 5px 5px 15px white;
 }
 
 .detajet::first-letter {
     text-transform: uppercase;
   }
+
+  .miniCartTotal {
+    float: left;
+    font-size: 16px;
+    width: 25%;
+}
+
+.totalPrice {
+    font-size: 28px;
+    font-weight: bold;
+}

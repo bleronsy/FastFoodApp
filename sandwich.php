@@ -16,14 +16,6 @@
         </nav> -->
         <div class="bigCnt bigCntHeader">
             <div class="logo"></div> 
-           
-            <div class="miniCartTotal">
-                <div id="chart"></div>    
-                <div>Total Price: <span id="total">0.00</span>€</div>    
-            </div>
-           <div class="alertProductAddToCart">
-           Shporta
-            </div>
        </div>
     </header>
     <main>
@@ -41,7 +33,6 @@
 
         <div class="gjithaUshqimet">
             <?php
-            session_start();
                 $host = 'localhost';
                 $dbname = 'fooddelivery';
                 $username = 'root';
@@ -61,9 +52,11 @@
                             echo "<div class='ushqimi'>";
                             echo "<div class='emri'>".$row['emri']."</div>";
                             echo "<div class='detajet'>".$row['detajet']."</div>";
-                            echo "<div class='cmimi'>".$row['cmimi']."</div>";
-                            echo "<div class='imazhi'><img src='".$row['imazhi']."' alt=''  /></div>";
+                            echo "<div class='ushqimiBottom'>";
+                            echo "<div class='cmimi'>".$row['cmimi']."€</div>";
                             echo "<button class='add-to-cart' data-name='".$row['emri']."' data-price='".$row['cmimi']."'>Add to Cart</button>";
+                            echo "</div>";
+                            echo "<div class='imazhi'><img src='".$row['imazhi']."' alt=''  /></div>";
                             echo "</div>";
                         }
                     } else {
@@ -73,14 +66,18 @@
                     echo "Connection failed: " . $e->getMessage();
                 }
             ?>
-
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="script.js"></script>
-
-        </div>
         </div>
 
+        <div class="miniCartTotal">
+            <div id="chart"></div>    
+            <div class="totalPrice">Total Price: <span id="total">0.00</span>€</div>    
+        </div>
+ 
+    </div>
     </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="script.js"></script>
 </body>
 </html>
 
