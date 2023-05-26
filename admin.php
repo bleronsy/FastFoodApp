@@ -1,3 +1,11 @@
+<?php
+
+   if (!isset($_SESSION['username'])) {
+    header('Location: adminlogin.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -116,6 +124,7 @@
 </head>
 <body>
     <?php
+
     // Check if the form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Check if delete action is requested
