@@ -82,7 +82,8 @@ a{
 }
 
 .emri,.detajet,.cmimi,.add-to-cart {
-  color: white;
+  color: black;
+  text-shadow: 2px 2px 2px white;
   position: relative;
   z-index: 1;
 }
@@ -110,6 +111,14 @@ a{
 
 .add-to-cart{
     background-color: black;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
 }
 
 .remove-item{
@@ -140,5 +149,51 @@ a{
 
 .totalPrice {
     font-size: 28px;
+    font-weight: bold;
+}
+
+.add-to-cart:hover{
+    background-color: #555;
+}
+
+h1{
+    text-align: center;
+    margin-right: 29%;
+    font-size: 50px;
+}
+
+.oferta-emri{
+    color: black;
+    text-shadow: 4px 4px 4px white;
+    position: relative;
+  z-index: 1;
+  text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin:20% 0;
+}
+
+.oferta-detajet{
+    color: black;
+    text-shadow: 4px 4px 4px white;
+    position: relative;
+  z-index: 1;
+  margin: 0 10%;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.oferta-detajet::first-letter{
+    text-transform: uppercase;
+}
+
+.oferta-cmimi{
+    color: black;
+    text-shadow: 4px 4px 4px white;
+    position: relative;
+  z-index: 1;
+  font-size: 24px;
+    margin-right: 25%;
     font-weight: bold;
 }

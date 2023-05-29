@@ -9,12 +9,9 @@
 </head>
 <body>
     <header>
-        <!-- <nav>
-            <img src="./images/hamburger.png" alt="app-logo">
-            <h1>Fast Food App</h1>
-        </nav> -->
         <div class="bigCnt bigCntHeader">
             <div class="logo"></div> 
+            <h1>Fast Food</h1>
        </div>
     </header>
     <main>
@@ -49,10 +46,10 @@
                     if ($stmt->rowCount() > 0) {
                         foreach ($result as $row) {
                             echo "<div class='ushqimi'>";
-                            echo "<div class='emri'>".$row['emri']."</div>";
-                            echo "<div class='detajet'>".$row['detajet']."</div>";
+                            echo "<div class='oferta-emri'>".$row['emri']."</div>";
+                            echo "<div class='oferta-detajet'>".$row['detajet']."</div>";
                             echo "<div class='ushqimiBottom'>";
-                            echo "<div class='cmimi'>".$row['cmimi']."€</div>";
+                            echo "<div class='oferta-cmimi'>".$row['cmimi']."€</div>";
                             echo "<button class='add-to-cart' data-name='".$row['emri']."' data-price='".$row['cmimi']."'>Add to Cart</button>";
                             echo "</div>";
                             echo "<div class='imazhi'><img src='".$row['imazhi']."' alt=''  /></div>";

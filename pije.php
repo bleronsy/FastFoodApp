@@ -16,6 +16,7 @@
         </nav> -->
         <div class="bigCnt bigCntHeader">
             <div class="logo"></div> 
+            <h1>Fast Food</h1>
        </div>
     </header>
     <main>
