@@ -75,7 +75,6 @@
                     $stmt = $conn->query($query);
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                    // Data to be displayed
                     if ($stmt->rowCount() > 0) {
                         foreach ($result as $row) {
                             echo "<div class='ushqimi'>";
@@ -126,6 +125,13 @@
                         }
                     }
                 ?>
+
+                <!-- Address change form -->
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <label for="address">Ndrysho adresën:</label>
+                    <input type="text" name="address" id="address" required>
+                    <button type="submit">Ndrysho</button>
+                </form>
             </div>
         </div>
     </div>

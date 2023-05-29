@@ -36,7 +36,6 @@
     }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,7 +75,7 @@
                     $stmt = $conn->query($query);
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                    // Data to be displayed
+                    //data to be displayed
                     if ($stmt->rowCount() > 0) {
                         foreach ($result as $row) {
                             echo "<div class='ushqimi'>";
@@ -108,20 +107,39 @@
                     <button id="paypal-button">Pay with PayPal</button>
                 </div>
                 <?php
-                // Fetch user address based on the logged-in user
-                if (isset($_SESSION['email'])) {
-                    $address = $_SESSION['address'];
-                    echo "<div class='user-address'>Adresa: " . $address . "</div>";
-                }
-            ?>
-            
-            <!-- Address change form -->
-            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <label for="address">Ndrysho adresën:</label>
-                <input type="text" name="address" id="address" required>
-                <button type="submit">Ndrysho</button>
-            </form>
+                    // Fetch user address based on the logged-in user
+                    if (isset($_SESSION['email'])) {
+                        $email = $_SESSION['email'];
+                        try {
+                            $query = "SELECT Adresa FROM regjistrimi WHERE Email = :email";
+                            $stmt = $conn->prepare($query);
+                            $stmt->bindParam(':email', $email);
+                            $stmt->execute();
+                            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                            if ($stmt->rowCount() > 0) {
+                                $address = $user['Adresa'];
+                                echo "<div class='user-address'>Adresa: " . $address . "</div>";
+                            }
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
+                        }
+                    }
+                ?>
+
+                <!-- Address change form -->
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <label for="address">Ndrysho adresën:</label>
+                    <input type="text" name="address" id="address" required>
+                    <button type="submit">Ndrysho</button>
+                </form>
         </div>
+        </div>
+        </div>
+ 
+            </div>
+ 
+            </div>
         </div>
  
             </div>
