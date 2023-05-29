@@ -49,16 +49,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="./styles/kycu.css">
 </head>
 <body>
-    <h1>Login</h1>
-    <?php if (isset($errorMessage)) { ?>
-        <p><?php echo $errorMessage; ?></p>
-    <?php } ?>
+<header>
+        <div class="bigCnt bigCntHeader">
+            <div class="logo"></div> 
+            <h1>Fast Food</h1>
+       </div>
+    </header>
+    <main>
+        <ul class="lista_e_ushqimeve">
+            <li><a href="./index.php">Oferta</a></li>
+            <li><a href="./sandwich.php">Sandwich-a</a></li>
+            <li><a href="./hamburger.php">Hamburgera</a></li>
+            <li><a href="./pizza.php">Pizza</a></li>
+            <li><a href="./sallata.php">Sallata</a></li>
+            <li><a href="./pije.php">Pije</a></li>
+            <li><a href="./kycu.php">Kyçu</a></li>
+            <li><a href="./regjistrohu.php">Regjistrohu</a></li>
+        </ul>
+        <div class="kycu">
+        <h1>Kyçu</h1>
+        <?php if (isset($errorMessage)) { ?>
+            <p><?php echo $errorMessage; ?></p>
+            <?php } ?>
     <form method="POST" action="">
         <input type="email" name="email" placeholder="Email" required>
         <br>
         <input type="password" name="password" placeholder="Password" required>
         <br>
         <input type="submit" value="Kyçu">
+        </div>
     </form>
+    </main>
 </body>
 </html>

@@ -1,3 +1,41 @@
+.bigCntHeader {
+  background-color: #FFF;
+  height: 94px;
+  border-bottom: 1px solid #e9e9e9;
+}
+.logo {
+  position: relative;
+  float: left;
+  width: 220px;
+  height: calc(100% - 16px);
+  cursor: pointer;
+  margin: 8px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center left;
+  background-image: url(../images/hamburger.png);
+}
+
+.lista_e_ushqimeve{
+  list-style: none;
+  padding-right: 30px;
+  border-right: 1px solid gray;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+.kycu{
+  max-width: 300px;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display: block;
+  margin: 0 auto;
+}
 form {
     max-width: 400px;
     margin: 20px auto;
@@ -46,3 +84,8 @@ form {
     color: #333333;
   }
   
+  h1{
+    text-align: center;
+    margin-right: 29%;
+    font-size: 50px;
+}
