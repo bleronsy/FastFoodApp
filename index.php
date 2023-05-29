@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,16 +69,17 @@
 
         <div class="miniCartTotal">
             <div id="chart"></div>    
-            <div class="totalPrice">Total Price: <span id="total">0.00</span>€</div>    
+            <div class="totalPrice">Total Price: <span id="total">0.00</span>€</div>
+            <div id="checkout">
+                <button id="cash-button">Pay with Cash</button>
+                <button id="paypal-button">Pay with PayPal</button>
+            </div>
         </div>
- 
     </div>
     </main>
 
+    <script src="https://www.paypal.com/sdk/js?client-id=AUIM-g4xxRtmJM6W4Wyrb4fMmVE6fN2WDcRUPgJAlg2UWo38DBbq1kSD4hP2WloBMaTQ9mgA1nAT5Ohi&currency=EUR"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-     <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
-
-
-
