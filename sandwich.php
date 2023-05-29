@@ -1,5 +1,37 @@
 <?php
     session_start();
+
+    // Check if the form is submitted
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Get the new address from the form
+        $newAddress = $_POST['new_address'];
+
+        // Update the user's address in the database
+        if (isset($_SESSION['email'])) {
+            $email = $_SESSION['email'];
+            try {
+                $host = 'localhost';
+                $dbname = 'fooddelivery';
+                $username = 'root';
+                $password = '';
+
+                $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $query = "UPDATE regjistrimi SET Adresa = :address WHERE Email = :email";
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':address', $newAddress);
+                $stmt->bindParam(':email', $email);
+                $stmt->execute();
+
+                // Display success message
+                echo "<div class='success-message'>Address updated successfully!</div>";
+            } catch (PDOException $e) {
+                // Display error message
+                echo "<div class='error-message'>Error: " . $e->getMessage() . "</div>";
+            }
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,28 +106,34 @@
         <div class="miniCartTotal">
             <div id="chart"></div>    
             <div class="totalPrice">Total Price: <span id="total">0.00</span>€</div>    
-            <?php
-                    // Fetch user address based on the logged-in user
-                    if (isset($_SESSION['email'])) {
-                        $email = $_SESSION['email'];
-                        try {
-                            $query = "SELECT Adresa FROM regjistrimi WHERE Email = :email";
-                            $stmt = $conn->prepare($query);
-                            $stmt->bindParam(':email', $email);
-                            $stmt->execute();
-                            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                            if ($stmt->rowCount() > 0) {
-                                $address = $user['Adresa'];
-                                echo "<div class='user-address'>Adresa: " . $address . "</div>";
-                            }
-                        } catch (PDOException $e) {
-                            echo "Error: " . $e->getMessage();
+            <?php
+                // Display the address form
+                if (isset($_SESSION['email'])) {
+                    $email = $_SESSION['email'];
+                    try {
+                        $query = "SELECT Adresa FROM regjistrimi WHERE Email = :email";
+                        $stmt = $conn->prepare($query);
+                        $stmt->bindParam(':email', $email);
+                        $stmt->execute();
+                        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                        if ($stmt->rowCount() > 0) {
+                            $address = $user['Adresa'];
+                            echo "<div class='user-address'>Adresa: " . $address . "</div>";
                         }
+                    } catch (PDOException $e) {
+                        echo "Error: " . $e->getMessage();
                     }
-                ?>
+                }
+            ?>
+
+            <form action="" method="post">
+                <label for="new_address">Ndrysho Adresën:</label>
+                <input type="text" name="new_address" id="new_address" placeholder="Enter new address" required>
+                <button type="submit">Ndrysho</button>
+            </form>
         </div>
- 
     </div>
     </main>
 
@@ -103,6 +141,3 @@
      <script src="script.js"></script>
 </body>
 </html>
-
-
-

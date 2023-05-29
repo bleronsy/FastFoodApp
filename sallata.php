@@ -1,3 +1,40 @@
+<?php
+    session_start();
+
+    // Database configuration
+    $host = 'localhost';
+    $dbname = 'fooddelivery';
+    $username = 'root';
+    $password = '';
+
+    // Check if the form is submitted
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['address'])) {
+            $email = $_SESSION['email'];
+            $address = $_POST['address'];
+
+            try {
+                $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $query = "UPDATE regjistrimi SET Adresa = :address WHERE Email = :email";
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':address', $address);
+                $stmt->bindParam(':email', $email);
+                $stmt->execute();
+
+                // Update the user's session with the new address
+                $_SESSION['address'] = $address;
+
+                // Redirect to the same page to avoid form resubmission
+                header('Location: ' . $_SERVER['PHP_SELF']);
+                exit();
+            } catch(PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        }
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,10 +47,6 @@
 </head>
 <body>
     <header>
-        <!-- <nav>
-            <img src="./images/hamburger.png" alt="app-logo">
-            <h1>Fast Food App</h1>
-        </nav> -->
         <div class="bigCnt bigCntHeader">
             <div class="logo"></div> 
             <h1>Fast Food</h1>
@@ -34,11 +67,6 @@
 
         <div class="gjithaUshqimet">
             <?php
-                $host = 'localhost';
-                $dbname = 'fooddelivery';
-                $username = 'root';
-                $password = '';
-
                 try {
                     $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -47,7 +75,7 @@
                     $stmt = $conn->query($query);
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                    //data to be displayed
+                    // Data to be displayed
                     if ($stmt->rowCount() > 0) {
                         foreach ($result as $row) {
                             echo "<div class='ushqimi'>";
@@ -72,15 +100,25 @@
         <div class="miniCartTotal">
             <div id="chart"></div>    
             <div class="totalPrice">Total Price: <span id="total">0.00</span>€</div>    
+            <?php
+                // Fetch user address based on the logged-in user
+                if (isset($_SESSION['email'])) {
+                    $address = $_SESSION['address'];
+                    echo "<div class='user-address'>Adresa: " . $address . "</div>";
+                }
+            ?>
+            
+            <!-- Address change form -->
+            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <label for="address">Ndrysho adresën:</label>
+                <input type="text" name="address" id="address" required>
+                <button type="submit">Ndrysho</button>
+            </form>
         </div>
- 
     </div>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-     <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
-
-
-
