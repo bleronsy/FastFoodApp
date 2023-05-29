@@ -54,7 +54,7 @@
                             echo "<div class='oferta-detajet'>".$row['detajet']."</div>";
                             echo "<div class='ushqimiBottom'>";
                             echo "<div class='oferta-cmimi'>".$row['cmimi']."€</div>";
-                            echo "<button class='add-to-cart' data-name='".$row['emri']."' data-price='".$row['cmimi']."'>Add to Cart</button>";
+                            echo "<button class='add-to-cart' data-name='".$row['emri']."' data-price='".$row['cmimi']."'>Shto në shportë</button>";
                             echo "</div>";
                             echo "<div class='imazhi'><img src='".$row['imazhi']."' alt=''  /></div>";
                             echo "</div>";
@@ -69,8 +69,9 @@
         </div>
 
         <div class="miniCartTotal">
+        <span class="totalPrice">Shporta:</span>
             <div id="chart"></div>    
-            <div class="totalPrice">Total Price: <span id="total">0.00</span>€</div>
+            <div class="totalPrice">Çmimi total: <span id="total">0.00</span>€</div>
             <div id="checkout">
                 <div class="payment-methods">
                     <button id="cash-button">Pay with Cash</button>

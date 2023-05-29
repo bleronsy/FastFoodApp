@@ -4,7 +4,7 @@ $(document).ready(function() {
     $('.add-to-cart').on('click', function() {
         var name = $(this).data('name');
         var price = parseFloat($(this).data('price'));
-        var item = "<div>" + name + ": " + price.toFixed(2) + "€ <button class='remove-item'>Remove</button></div>";
+        var item = "<div class='cartitem'>" + name + ": " + price.toFixed(2) + "€ <button class='remove-item'>Largo nga shporta</button></div>";
         $('#chart').append(item);
 
         totalPrice += price;
@@ -47,7 +47,7 @@ $(document).ready(function() {
     }
 
     function completeOrder() {
-        alert('Payment successful. Your order has been completed. Thank you!');
+        alert('Pagesa u krye me sukses dhe porosia u dërgua. Falemindeit!');
         clearCart();
     }
 
@@ -64,14 +64,8 @@ $(document).ready(function() {
                 });
             },
             onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    // Check if the payment is successful
-                    if (details.status === 'COMPLETED') {
-                        completeOrder();
-                    } else {
-                        alert('Payment was not successful. Please try again.');
-                    }
-                });
+                // Check if the payment is successful
+                completeOrder();
             }
         }).render('#checkout');
 
@@ -80,7 +74,10 @@ $(document).ready(function() {
     }
 
     $('#cash-button').on('click', function() {
-        alert('Order received. Thank you!');
+        if ($('#chart').is(':empty')) {
+            return; // Do nothing if the cart is empty
+        }
+        alert('Porosia u dërgua. Falemindeit!');
         clearCart();
     });
 
