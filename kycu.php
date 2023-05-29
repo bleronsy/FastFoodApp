@@ -28,7 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check if a matching user was found
     if ($stmt->rowCount() > 0) {
-        // User is authenticated, redirect to a success page
+        // User is authenticated, store email in session and redirect to index.php
+        $_SESSION['email'] = $email;
         header("Location: index.php");
         exit();
     } else {

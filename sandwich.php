@@ -1,4 +1,6 @@
-
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,6 +74,26 @@
         <div class="miniCartTotal">
             <div id="chart"></div>    
             <div class="totalPrice">Total Price: <span id="total">0.00</span>€</div>    
+            <?php
+                    // Fetch user address based on the logged-in user
+                    if (isset($_SESSION['email'])) {
+                        $email = $_SESSION['email'];
+                        try {
+                            $query = "SELECT Adresa FROM regjistrimi WHERE Email = :email";
+                            $stmt = $conn->prepare($query);
+                            $stmt->bindParam(':email', $email);
+                            $stmt->execute();
+                            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                            if ($stmt->rowCount() > 0) {
+                                $address = $user['Adresa'];
+                                echo "<div class='user-address'>Adresa: " . $address . "</div>";
+                            }
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
+                        }
+                    }
+                ?>
         </div>
  
     </div>
