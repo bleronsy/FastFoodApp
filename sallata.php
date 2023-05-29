@@ -1,5 +1,39 @@
 <?php
     session_start();
+
+    // Database configuration
+    $host = 'localhost';
+    $dbname = 'fooddelivery';
+    $username = 'root';
+    $password = '';
+
+    // Check if the form is submitted
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['address'])) {
+            $email = $_SESSION['email'];
+            $address = $_POST['address'];
+
+            try {
+                $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $query = "UPDATE regjistrimi SET Adresa = :address WHERE Email = :email";
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':address', $address);
+                $stmt->bindParam(':email', $email);
+                $stmt->execute();
+
+                // Update the user's session with the new address
+                $_SESSION['address'] = $address;
+
+                // Redirect to the same page to avoid form resubmission
+                header('Location: ' . $_SERVER['PHP_SELF']);
+                exit();
+            } catch(PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -33,11 +67,6 @@
 
         <div class="gjithaUshqimet">
             <?php
-                $host = 'localhost';
-                $dbname = 'fooddelivery';
-                $username = 'root';
-                $password = '';
-
                 try {
                     $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -46,7 +75,7 @@
                     $stmt = $conn->query($query);
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                    //data to be displayed
+                    // Data to be displayed
                     if ($stmt->rowCount() > 0) {
                         foreach ($result as $row) {
                             echo "<div class='ushqimi'>";
