@@ -37,6 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errorMessage = "Invalid email or password.";
     }
 }
+
+// Process logout request
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: kycu.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -50,35 +58,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <header>
-        <div class="bigCnt bigCntHeader">
-            <div class="logo"></div> 
-            <h1>Fast Food</h1>
-       </div>
-    </header>
-    <main>
+    <div class="bigCnt bigCntHeader">
+        <div class="logo"></div> 
+        <h1>Fast Food</h1>
+   </div>
+</header>
+<main>
+    <div class="pjesaKryesoreListaDheUshqimet">
         <ul class="lista_e_ushqimeve">
-            <li><a href="./index.php">Oferta</a></li>
-            <li><a href="./sandwich.php">Sandwich-a</a></li>
-            <li><a href="./hamburger.php">Hamburgera</a></li>
-            <li><a href="./pizza.php">Pizza</a></li>
-            <li><a href="./sallata.php">Sallata</a></li>
-            <li><a href="./pije.php">Pije</a></li>
+        <li><a href="./index.php">Oferta</a></li>
+        <li><a href="./sandwich.php">Sandwich-a</a></li>
+        <li><a href="./hamburger.php">Hamburgera</a></li>
+        <li><a href="./pizza.php">Pizza</a></li>
+        <li><a href="./sallata.php">Sallata</a></li>
+        <li><a href="./pije.php">Pije</a></li>
+        <?php if (isset($_SESSION['email'])) { ?>
+            <li><a href="?logout=1">Largohu</a></li>
+        <?php } else { ?>
             <li><a href="./kycu.php">Kyçu</a></li>
             <li><a href="./regjistrohu.php">Regjistrohu</a></li>
+        <?php } ?>
         </ul>
         <div class="kycu">
-        <h1>Kyçu</h1>
-        <?php if (isset($errorMessage)) { ?>
+            <h1>Kyçu</h1>
+            <?php if (isset($errorMessage)) { ?>
             <p><?php echo $errorMessage; ?></p>
             <?php } ?>
-    <form method="POST" action="">
-        <input type="email" name="email" placeholder="Email" required>
-        <br>
-        <input type="password" name="password" placeholder="Password" required>
-        <br>
-        <input type="submit" value="Kyçu">
+            <form method="POST" action="">
+                <input type="email" name="email" placeholder="Email" required>
+                <br>
+                <input type="password" name="password" placeholder="Password" required>
+                <br>
+                <input type="submit" value="Kyçu">
+            </form>
         </div>
-    </form>
-    </main>
+    </div>
+</main>
 </body>
 </html>

@@ -1,34 +1,36 @@
 <?php
     session_start();
 
+    // Database configuration
+    $host = 'localhost';
+    $dbname = 'fooddelivery';
+    $username = 'root';
+    $password = '';
+
     // Check if the form is submitted
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Get the new address from the form
-        $newAddress = $_POST['new_address'];
-
-        // Update the user's address in the database
-        if (isset($_SESSION['email'])) {
+        if (isset($_POST['address'])) {
             $email = $_SESSION['email'];
-            try {
-                $host = 'localhost';
-                $dbname = 'fooddelivery';
-                $username = 'root';
-                $password = '';
+            $address = $_POST['address'];
 
+            try {
                 $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 $query = "UPDATE regjistrimi SET Adresa = :address WHERE Email = :email";
                 $stmt = $conn->prepare($query);
-                $stmt->bindParam(':address', $newAddress);
+                $stmt->bindParam(':address', $address);
                 $stmt->bindParam(':email', $email);
                 $stmt->execute();
 
-                // Display success message
-                echo "<div class='success-message'>Address updated successfully!</div>";
-            } catch (PDOException $e) {
-                // Display error message
-                echo "<div class='error-message'>Error: " . $e->getMessage() . "</div>";
+                // Update the user's session with the new address
+                $_SESSION['address'] = $address;
+
+                // Redirect to the same page to avoid form resubmission
+                header('Location: ' . $_SERVER['PHP_SELF']);
+                exit();
+            } catch(PDOException $e) {
+                echo "Error: " . $e->getMessage();
             }
         }
     }
@@ -65,11 +67,6 @@
 
         <div class="gjithaUshqimet">
             <?php
-                $host = 'localhost';
-                $dbname = 'fooddelivery';
-                $username = 'root';
-                $password = '';
-
                 try {
                     $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -99,17 +96,20 @@
                 }
             ?>
         </div>
-
         <div class="miniCartTotal">
+        <div>
         <span class="totalPrice">Shporta:</span>
             <div id="chart"></div>    
             <div class="totalPrice">Çmimi total: <span id="total">0.00</span>€</div>
+            
             <div id="checkout">
                 <div class="payment-methods">
-                    <button id="cash-button">Pay with Cash</button>
-                    <button id="paypal-button">Pay with PayPal</button>
+                    <button id="cash-button">Paguaj me Cash</button>
+                    <button id="paypal-button">Paguaj me PayPal</button>
                 </div>
-                <?php
+            </div>
+        </div>
+        <?php
                     // Fetch user address based on the logged-in user
                     if (isset($_SESSION['email'])) {
                         $email = $_SESSION['email'];
@@ -120,28 +120,23 @@
                             $stmt->execute();
                             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                        if ($stmt->rowCount() > 0) {
-                            $address = $user['Adresa'];
-                            echo "<div class='user-address'>Adresa: " . $address . "</div>";
+                            if ($stmt->rowCount() > 0) {
+                                $address = $user['Adresa'];
+                                echo "<div class='user-address'>Adresa: " . $address . "</div>";
+                            }
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
                         }
-                    } catch (PDOException $e) {
-                        echo "Error: " . $e->getMessage();
                     }
-                }
-            ?>
+                ?>
 
-            <form action="" method="post">
-                <label for="new_address">Ndrysho Adresën:</label>
-                <input type="text" name="new_address" id="new_address" placeholder="Enter new address" required>
-                <button type="submit">Ndrysho</button>
-            </form>
-        </div>
-        </div>
- 
-            </div>
-        </div>
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <label for="address">Ndrysho adresën:</label>
+                    <input type="text" name="address" id="address" required>
+                    <button type="submit">Ndrysho</button>
+                </form>
     </div>
-
+    </div>
     <script src="https://www.paypal.com/sdk/js?client-id=AUIM-g4xxRtmJM6W4Wyrb4fMmVE6fN2WDcRUPgJAlg2UWo38DBbq1kSD4hP2WloBMaTQ9mgA1nAT5Ohi&currency=EUR"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>

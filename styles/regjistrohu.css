@@ -15,11 +15,17 @@
   background-position: center left;
   background-image: url(../images/hamburger.png);
 }
-
+.pjesaKryesoreListaDheUshqimet{
+  display: flex;
+  flex-direction: row;
+}
 .lista_e_ushqimeve{
-  list-style: none;
-  padding-right: 30px;
-  border-right: 1px solid gray;
+    list-style: none;
+    padding-right: 30px;
+    display: flex;
+    border-right: 1px solid gray;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 
@@ -116,4 +122,10 @@ h1{
   text-align: center;
   margin-right: 29%;
   font-size: 50px;
+}
+
+.registration-form{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 }

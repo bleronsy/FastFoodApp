@@ -16,10 +16,18 @@
   background-image: url(../images/hamburger.png);
 }
 
+.pjesaKryesoreListaDheUshqimet{
+  display: flex;
+  flex-direction: row;
+}
+
 .lista_e_ushqimeve{
   list-style: none;
   padding-right: 30px;
+  display: flex;
   border-right: 1px solid gray;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 a{

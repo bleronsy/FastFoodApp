@@ -7,10 +7,7 @@
     $username = 'root';
     $password = '';
 
-    // Check if the user is not logged in and tries to order
-    $loggedIn = isset($_SESSION['email']);
-    $showAddressForm = false;
-
+    // Check if the form is submitted
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['address'])) {
             $email = $_SESSION['email'];
@@ -35,11 +32,6 @@
             } catch(PDOException $e) {
                 echo "Error: " . $e->getMessage();
             }
-        }
-    } else {
-        // User is not logged in and tries to order
-        if (!$loggedIn) {
-            $showAddressForm = true;
         }
     }
 ?>
@@ -118,33 +110,31 @@
             </div>
         </div>
         <?php
-            if ($loggedIn) {
-                // Fetch user address based on the logged-in user
-                $email = $_SESSION['email'];
-                try {
-                    $query = "SELECT Adresa FROM regjistrimi WHERE Email = :email";
-                    $stmt = $conn->prepare($query);
-                    $stmt->bindParam(':email', $email);
-                    $stmt->execute();
-                    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                    // Fetch user address based on the logged-in user
+                    if (isset($_SESSION['email'])) {
+                        $email = $_SESSION['email'];
+                        try {
+                            $query = "SELECT Adresa FROM regjistrimi WHERE Email = :email";
+                            $stmt = $conn->prepare($query);
+                            $stmt->bindParam(':email', $email);
+                            $stmt->execute();
+                            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                    if ($stmt->rowCount() > 0) {
-                        $address = $user['Adresa'];
-                        echo "<div class='user-address'>Adresa: " . $address . "</div>";
+                            if ($stmt->rowCount() > 0) {
+                                $address = $user['Adresa'];
+                                echo "<div class='user-address'>Adresa: " . $address . "</div>";
+                            }
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
+                        }
                     }
-                } catch (PDOException $e) {
-                    echo "Error: " . $e->getMessage();
-                }
-            } elseif ($showAddressForm) {
-                // User is not logged in, show address form
-                echo "
-                <form method='POST' action='".$_SERVER['PHP_SELF']."'>
-                    <label for='address'>Adresa:</label>
-                    <input type='text' name='address' id='address' required>
-                    <button type='submit'>Ruaj</button>
-                </form>";
-            }
-        ?>
+                ?>
+
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <label for="address">Ndrysho adresën:</label>
+                    <input type="text" name="address" id="address" required>
+                    <button type="submit">Ndrysho</button>
+                </form>
     </div>
     </div>
     <script src="https://www.paypal.com/sdk/js?client-id=AUIM-g4xxRtmJM6W4Wyrb4fMmVE6fN2WDcRUPgJAlg2UWo38DBbq1kSD4hP2WloBMaTQ9mgA1nAT5Ohi&currency=EUR"></script>

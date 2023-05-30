@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
        </div>
     </header>
     <main>
+        <div class="pjesaKryesoreListaDheUshqimet">
     <ul class="lista_e_ushqimeve">
             <li><a href="./index.php">Oferta</a></li>
             <li><a href="./sandwich.php">Sandwich-a</a></li>
@@ -55,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <li><a href="./kycu.php">Kyçu</a></li>
             <li><a href="./regjistrohu.php">Regjistrohu</a></li>
         </ul>
+    <div class="registration-form">
     <form action="regjistrohu.php" method="post">
         <input type="text" name="emri" placeholder="Emri">
         <input type="text" name="email" placeholder="Email">
@@ -68,7 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="submit" value="Regjistrohu">
     </form>
     <a href="./kycu.php" class="keni_llogari">Keni llogari? Kycu</a>
-    <a href="" class="pa_llogari">Vazhdo pa krijuar llogari</a>
+    </div>
+    
     <p class="form-message">
         <?php
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -78,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         ?>
     </p>
+    </div>
     </main>
 </body>
 </html>

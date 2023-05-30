@@ -96,17 +96,20 @@
                 }
             ?>
         </div>
-
         <div class="miniCartTotal">
+        <div>
         <span class="totalPrice">Shporta:</span>
             <div id="chart"></div>    
             <div class="totalPrice">Çmimi total: <span id="total">0.00</span>€</div>
+            
             <div id="checkout">
                 <div class="payment-methods">
-                    <button id="cash-button">Pay with Cash</button>
-                    <button id="paypal-button">Pay with PayPal</button>
+                    <button id="cash-button">Paguaj me Cash</button>
+                    <button id="paypal-button">Paguaj me PayPal</button>
                 </div>
-                <?php
+            </div>
+        </div>
+        <?php
                     // Fetch user address based on the logged-in user
                     if (isset($_SESSION['email'])) {
                         $email = $_SESSION['email'];
@@ -127,26 +130,13 @@
                     }
                 ?>
 
-                <!-- Address change form -->
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <label for="address">Ndrysho adresën:</label>
                     <input type="text" name="address" id="address" required>
                     <button type="submit">Ndrysho</button>
                 </form>
-        </div>
-        </div>
-        </div>
- 
-            </div>
- 
-            </div>
-        </div>
- 
-            </div>
- 
-        </div>
     </div>
-
+    </div>
     <script src="https://www.paypal.com/sdk/js?client-id=AUIM-g4xxRtmJM6W4Wyrb4fMmVE6fN2WDcRUPgJAlg2UWo38DBbq1kSD4hP2WloBMaTQ9mgA1nAT5Ohi&currency=EUR"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>

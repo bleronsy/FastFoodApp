@@ -47,7 +47,7 @@ $(document).ready(function() {
     }
 
     function completeOrder() {
-        alert('Pagesa u krye me sukses dhe porosia u dërgua. Faleminderit!');
+        alert('Pagesa u krye me sukses dhe porosia u dërgua. Falemindeit!');
         clearCart();
     }
 
@@ -73,67 +73,17 @@ $(document).ready(function() {
         $('#paypal-button').prop('disabled', true);
     }
 
-    function showAddressForm() {
-        $('#address-form').show();
-    }
-
-    function hideAddressForm() {
-        $('#address-form').hide();
-    }
-
-    function getAddress() {
-        return $('#address').val();
-    }
-
-    function setAddress(address) {
-        $('#user-address').text('Adresa: ' + address);
-    }
-
-    function isUserLoggedIn() {
-        return "<?php echo $loggedIn ? 'true' : 'false'; ?>";
-    }
-
-    function handleCashPayment() {
-        if ($('#chart').is(':empty')) {
-            return; // Do nothing if the cart is empty
-        }
-        
-        if (isUserLoggedIn()) {
-            var address = getAddress();
-            if (address) {
-                setAddress(address);
-                alert('Porosia u dërgua. Faleminderit!');
-                clearCart();
-            } else {
-                alert('Ju lutem vendosni adresën tuaj.');
-            }
-        } else {
-            showAddressForm();
-        }
-    }
-
-    function handlePayPalPayment() {
-        if ($('#chart').is(':empty')) {
-            return; // Do nothing if the cart is empty
-        }
-
-        if (isUserLoggedIn()) {
-            initiatePayPalCheckout();
-        } else {
-            showAddressForm();
-        }
-    }
-
     $('#cash-button').on('click', function() {
-        handleCashPayment();
+        if ($('#chart').is(':empty')) {
+            return; // Do nothing if the cart is empty
+        }
+        alert('Porosia u dërgua. Falemindeit!');
+        clearCart();
     });
 
     $('#paypal-button').on('click', function() {
-        handlePayPalPayment();
+        initiatePayPalCheckout();
     });
-
-    // Hide the address form initially
-    hideAddressForm();
 
     // Initial update of the total price and cart items
     updateTotalPrice();
