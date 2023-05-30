@@ -246,3 +246,7 @@ form {
   button[type="submit"]:hover {
     background-color: #45a049;
   }
+
+  #paypal-button{
+    margin-bottom: 10px;
+  }
