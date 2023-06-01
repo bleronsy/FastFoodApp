@@ -1,9 +1,5 @@
 <?php
 session_start();
-
-// Check if the user is already logged in, redirect to admin.php
-
-// Rest of the code...
 ?>
 
 <!DOCTYPE html>
